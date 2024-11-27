@@ -80,7 +80,7 @@ $(document).ready(function(){
 
         // Send data to the backend using AJAX POST request
         $.ajax({
-            url: '/your-backend-endpoint', // Replace with your backend endpoint
+            url: 'http://localhost:6000/api/messages', // Replace with your backend endpoint
             type: 'POST',
             data: formData,
             success: function(response) {
@@ -88,7 +88,7 @@ $(document).ready(function(){
                 console.log('Form submitted successfully:', response);
                 alert('Form submitted successfully!');
                 // Optionally reset the form
-                $('#your-form-id')[0].reset();
+                $('674652ccfbb23dc15858b9ce')[0].reset();
             },
             error: function(xhr, status, error) {
                 // Handle error response
