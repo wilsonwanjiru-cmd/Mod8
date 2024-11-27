@@ -1,43 +1,45 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const cors = require('cors');
 require('dotenv').config();
 
-const placesRoutes = require('./routes/places-routes');
-const usersRoutes = require('./routes/users-routes');
+const messageRoutes = require('./routes/message-routes');
+const cvRoutes = require('./routes/cv-routes'); // Import CV routes
+const HttpError = require('./models/http-error');
 
 const app = express();
 
 // Middleware
-app.use(cors());
-app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // Routes
-app.use('/api/places', placesRoutes); 
-app.use('/api/users', usersRoutes); 
+app.use('/api/messages', messageRoutes);
+app.use('/api/cvs', cvRoutes); // Add CV routes
 
-// MongoDB connection
-mongoose
-  .connect(process.env.MONGO_URI)
-  .then(() => {
-    console.log("Connected to MongoDB");
-  })
-  .catch((error) => {
-    console.log("Error connecting to MongoDB:", error);
-  });
+// Handle undefined routes
+app.use((req, res, next) => {
+  const error = new HttpError('Could not find this route.', 404);
+  throw error;
+});
 
 // Error handling middleware
 app.use((error, req, res, next) => {
-  if (res.headerSent) {
+  if (res.headersSent) {
     return next(error);
   }
   res.status(error.code || 500);
   res.json({ message: error.message || 'An unknown error occurred!' });
 });
 
-// Start the server
-app.listen(1000, () => {
-  console.log("Server running on port 1000");
-});
+// MongoDB connection
+mongoose
+  .connect(process.env.MONGO_URL, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => {
+    console.log('Connected to MongoDB');
+    app.listen(process.env.PORT || 6000, () => {
+      console.log(`Server is running on port ${process.env.PORT || 6000}`);
+    });
+  })
+  .catch((err) => {
+    console.error('Database connection failed:', err);
+  });

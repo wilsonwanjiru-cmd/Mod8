@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"/>
 </head>
 <body>
+    
     <div class="scroll-up-btn">
         <i class="fas fa-angle-up"></i>
     </div>
@@ -55,7 +56,8 @@
                 <div class="column right">
                     <div class="text">I'm Wilson and I'm a <span class="typing-2"></span></div>
                     <p>Hey there, I'm Wilson Wanjiru, a tech enthusiast hailing from Nairobi, Kenya. My love for web development has taken me on a thrilling ride through the ever-evolving world of code. When I'm not busy crafting digital wonders, you can find me capturing mesmerizing shots with my camera or exploring new hiking trails with my four-legged friends. This blog is my creative space, and I'm thrilled to have you along for the ride!.</p>
-                    <a href="#">Download CV</a>
+                    <a href="http://localhost:6000/api/downloadCV" download>Download CV</a>
+
                 </div>
             </div>
         </div>
@@ -153,8 +155,8 @@
                 </div>
                 <div class="card">
                     <div class="box">
-                        <img src="images/dalmus.jpeg" alt="">
-                        <div class="text">Dalmus Akumu</div>
+                        <img src="images/ann.jpeg" alt="">
+                        <div class="text">Ann Muturi</div>
                         <p>Software Developer.</p>
                     </div>
                 </div>
@@ -168,7 +170,7 @@
                 <div class="card">
                     <div class="box">
                         <img src="images/melvin.jpeg" alt="">
-                        <div class="text">Someone name</div>
+                        <div class="text">Jackson Nganga</div>
                         <p>Web Developer.</p>
                     </div>
                 </div>
@@ -216,7 +218,7 @@
                 </div>
                 <div class="column right">
                     <div class="text">Message me</div>
-                    <form action="#">
+                    <form id="contact-form" method="POST">
                         <div class="fields">
                             <div class="field name">
                                 <input type="text" placeholder="Name" required>
